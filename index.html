@@ -1,49 +1,520 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<link rel="stylesheet" href="css/reset.css">
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css">
+  <title>reveal.js</title>
 
-		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="lib/css/monokai.css">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/black.css">
 
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
-		</div>
+  <!-- Theme used for syntax highlighting of code -->
+  <link rel="stylesheet" href="lib/css/monokai.css">
 
-		<script src="js/reveal.js"></script>
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+    document.getElementsByTagName('head')[0].appendChild(link);
+  </script>
+</head>
 
-		<script>
-			// More info about config & dependencies:
-			// - https://github.com/hakimel/reveal.js#configuration
-			// - https://github.com/hakimel/reveal.js#dependencies
-			Reveal.initialize({
-				dependencies: [
-					{ src: 'plugin/markdown/marked.js' },
-					{ src: 'plugin/markdown/markdown.js' },
-					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: 'plugin/highlight/highlight.js', async: true }
-				]
-			});
-		</script>
-	</body>
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section data-background-image="img/sonne.svg" data-background-size="25%" data-background-position="100% 0%">
+        <p style="font-size: 2em;">Combining Interactive Exploration and Search</p>
+        <p>for Navigating Academic Citation Data</p>
+        <!-- <img style="border-style: none; background-color: #191919" width="200" data-src="img/sonne.svg" alt="Down arrow"> -->
+      </section>
+      <section comment="What to solve">
+        <!-- <section>
+          <p style="font-size: 2em;">Problem!</p>
+        </section> -->
+        <section>
+          Exhibit A - Google Scholar
+          <video data-autoplay src="vid/scholarzoom.mp4"></video>
+          <aside class="notes">
+            This is google scholar, when searching for an author.
+            We find over 1000 publications for tim dwyer.
+            But as soon as we want to sort by recent publications, we're down to 19.
+            Microsoft does a much better job here:
+          </aside>
+        </section>
+        <section data-transition="slide-in fade-out">
+          Exhibit B - Microsoft Academic
+          <video data-autoplay src="vid/mag/01.mp4"></video>
+          <aside class="notes">
+            They give an overview how much data they have stored.
+            Let's look for tim again.
+          </aside>
+        </section>
+        <section data-transition="none">
+          Exhibit B - Microsoft Academic
+          <video data-autoplay src="vid/mag/02.mp4"></video>
+          <aside class="notes">
+            on the right we can see that there are disambiguations for the author.
+            the middle has the publications.
+          </aside>
+        </section>
+        <section data-transition="none">
+          Exhibit B - Microsoft Academic
+          <video data-autoplay src="vid/mag/03.mp4"></video>
+          <aside class="notes">
+            nice, the affiliation and the authors are linked, so we get a fast overview.
+            Oh look, much more sorting options than google.
+            let's grab the most cited paper ...
+          </aside>
+        </section>
+        <section data-transition="none">
+          Exhibit B - Microsoft Academic
+          <video data-autoplay src="vid/mag/04.mp4"></video>
+          <aside class="notes">
+            ... and have a look at the citations.
+            when we scroll past the abstract, we can see a little side pane with authors and institutions.
+            this displays the metrics for the current scope.
+            they can also be applied as positive filters: so, lets!
+          </aside>
+        </section>
+        <section data-transition="none">
+          Exhibit B - Microsoft Academic
+          <video data-autoplay src="vid/mag/05.mp4"></video>
+          <aside class="notes">
+            the two remaining papers might be interesting, so we can add them to our shopping basket.
+            these can then be exported to use with your reference management of choice.
+            remember how we found those, it's part of the exam at the end.
+            but there's another tab, "related".
+          </aside>
+        </section>
+        <section data-transition="none">
+          Exhibit B - Microsoft Academic
+          <video data-autoplay src="vid/mag/06.1.mp4"></video>
+          <aside class="notes">
+            looking at the institutions, we use the one with the most results.
+            let's see how many papers there are.
+          </aside>
+        </section>
+        <section data-transition="none">
+          Exhibit B - Microsoft Academic
+          <video data-autoplay src="vid/mag/06.2.mp4"></video>
+          <aside class="notes">
+            oh. one.
+            ok, has quirks.
+          </aside>
+        </section>
+      </section>
+      <section comment="what I did" data-background-transition="zoom" data-background-image="img/sonne.svg"
+        data-background-size="contain">
+        <section data-transition="fade">
+          <p style="font-size: 3em;">Sonne</p>
+          <aside class="notes">
+            So I built my own search engine with data from Semantic Scholar, Microsoft Academic Graph and dblp.
+            I called it "Sonne", because it's database is Apache Solr.
+            It's primary purpose is exploration of unfamiliar fields of study.
+            Let's say, I'm interested in graph layout...
+          </aside>
+        </section>
+        <section data-transition="slide-in fade-out">
+          <video data-autoplay src="vid/sonne/01.mp4"></video>
+          <aside class="notes">
+            ... which i search for here.
+            Once I got the search results, I sort them by citation count.
+            And since I'm still researching, I want to know more about the journal this was published in.
+            Which is fortunately a journal for surveys so I feel lucky!
+            I can unfold all the publications that were published in there...
+            ... which does not help much, for graph layout.
+            So what I can do here, ...
+          </aside>
+        </section>
+        <section data-transition="none" data-transition-speed="fast">
+          <video data-autoplay src="vid/sonne/02.mp4"></video>
+          <aside class="notes">
+            is search for "layout" and select two of the papers.
+            I can then check out where one of them was cited by, and what it's referencing.
+            Here, I don't see anything particularly interesting, but one of the references was cited really often.
+            So this piques my interest.
+            The last author is interesting, because I know Rivest from my cryptography classes.
+            And with that, let's get into more advanced features:
+          </aside>
+        </section>
+        <section data-transition="none" data-transition-speed="fast">
+          <video data-autoplay src="vid/sonne/03.mp4"></video>
+          <aside class="notes">
+            From Rivest, I know there are at least two other researchers that they cooperated with.
+            So let's look at the popular publications.
+            My suspicion that the RSA paper was high up is confirmed, and here we find Adelman and Shamir.
+            But when I look at how often they cooperated, I can see that
+            Adelman and Shamir aren't as high up in this list as I thought, so I learnt something.
+            Since that assumption played out poorly, I wonder where they published most?
+            Oh, he even published through the arXiv?
+          </aside>
+        </section>
+        <section data-transition="none" data-transition-speed="fast">
+          <video data-autoplay src="vid/sonne/04.mp4"></video>
+          <aside class="notes">
+            But now, how do I find the papers he published at the ACM Comms?
+            I could just filter for "rivest" just like I did beforehand for "layout".
+            But then again, I can select both of them and see the result like this!
+            Let's check out the first three popular papers.
+            Then remove one of the links and redo the layout, otherwise this is a little to crowded.
+          </aside>
+        </section>
+        <section data-transition="none" data-transition-speed="fast">
+          <video data-autoplay src="vid/sonne/05.mp4"></video>
+          <aside class="notes">
+            I might as well add Shamir and Adleman to the selection, so here we go.
+            Then I remove some more links to tidy up the layout, ... better.
+          </aside>
+        </section>
+        <section data-transition="none" data-transition-speed="fast">
+          <video data-autoplay src="vid/sonne/06.mp4"></video>
+          <aside class="notes">
+            So apart from my mindless wandering, we can reconstruct how we got here.
+            This is especially important when you're breaking into new fields.
+            Let me demonstrate:
+          </aside>
+        </section>
+        <section data-transition="none" data-transition-speed="fast">
+          <video data-autoplay src="vid/sonne/07faster.mp4"></video>
+          <aside class="notes">
+            Let's get back to the survey.
+            A breadth first search is often necessary to learn new technical terms.
+            To get an overview, I want to track the relations between papers.
+            Sure you could do that with mind maps, but I find the extra labor annoying.
+            Now I have it integrated into the searching process, which is much nicer.
+            Remember how I complained that other engines don't allow me to do other queries?
+            ...
+          </aside>
+        </section>
+        <section data-transition="none" data-transition-speed="fast">
+          <video data-autoplay src="vid/sonne/08faster.mp4"></video>
+          <aside class="notes">
+            With this we can find out things, like how many papers are there with 1000 or more authors?
+            Or ...
+          </aside>
+        </section>
+        <section data-transition="none" data-transition-speed="fast">
+          <video data-autoplay src="vid/sonne/09.mp4"></video>
+          <aside class="notes">
+            ... how often Manfred Reichert cites himself.
+          </aside>
+        </section>
+        <section data-transition="none" data-transition-speed="fast">
+          <video data-autoplay src="vid/sonne/10.mp4"></video>
+          <aside class="notes">
+            Much more useful for visualization might be the range faceting.
+            You can ask for bucketed data about between 0 and 50,000 how often papers are cited.
+            If we want more resolution ...
+          </aside>
+        </section>
+        <section data-transition="none" data-transition-speed="fast">
+          <video data-autoplay src="vid/sonne/11.mp4"></video>
+          <aside class="notes">
+            ... we can also change this to make a more fine grained request.
+            Remember, this works this fast on over 210 million publications.
+            So there's huge potential for experimentation.
+          </aside>
+        </section>
+      </section>
+      <section comment="challenges">
+        <section>
+          <p style="font-size: 2em">Challenges</p>
+          <aside class="notes">
+            Let's talk about the challenges that I encountered.
+          </aside>
+        </section>
+        <section data-background-image="img/solr.svg" data-background-size="contain">
+          <!-- <img style="border-style: none" src="img/solr.svg"/> -->
+          <p style="font-size: 2em">Page 1 of 1452</p>
+          <aside class="notes">
+            These are the first words you're greeted with, once you open the reference guide for Solr.
+            I really don't remember when I last read a book this long, but much functionality needs much documentation.
+            I think I read the documentation at least three times, and I'm still not sure about some details.
+            It's also full of pitfalls and small details that come back to bite you.
+            Like...
+          </aside>
+        </section>
+        <section data-background-image="img/solr.svg" data-background-size="contain">
+          <p>Defaults to</p>
+          <p style="font-size: 2em"><b>true for historical reasons,</b></p>
+          <p>but users are strongly encouraged to </p>
+          <p style="font-size: 2em"><b>set this to false</b></p>
+          <p style="font-size: 2em"><b>for stability</b></p>
+
+          <aside class="notes">
+            ... this little gem from the field type definitions.
+            This is mentioned in one page, and used in *none* of the examples.
+            And if you get one thing wrong, you'll have to build the index again.
+            Which brings us to the next topic ...
+          </aside>
+        </section>
+        <section data-background-image="img/solr_nodes.png" data-background-size="contain">
+          <!-- <img src="img/solr_nodes.png"> -->
+          <aside class="notes">
+            ... the size of the data.
+            The data from semantic scholar takes about 4 hours to index.
+            This does scale mostly linear, so for microsoft academic this will take a day.
+            As you can see, mistakes cost a lot of time.
+            But the most time was spent on converting the data from microsoft academic to a format that can be used by
+            Solr.
+          </aside>
+        </section>
+        <section>
+          <pre><code class="hljs" data-line-numbers="3,6,9" data-trim>
+            const doc = {
+              id: "2142920027",
+              author: [ "Frank Steinicke", "Timo Ropinski", "Klaus H. Hinrichs" ],
+              author_count: 3,
+              cited_by_count: 10,
+              conferenceseries: "International Conference in Central Europe on …",
+              date: "2005-01-01",
+              doc_type: "Conference",
+              references: [ "51251585", "147989794", "1798904708", "2111204873" ],
+              references_count: 4,
+              title: "Multimodal Interaction Metaphors …",
+              venue: "international conference in central europe on computer …"​,
+              year: 2005
+            }
+          </code></pre>
+          <aside class="notes">
+            The problem here is that the highlighted information is spread across several files.
+            But we have to have all information in one file.
+            For example ...
+          </aside>
+        </section>
+        <section>
+          <pre>
+            Papers.txt: 214.012.980 lines
+            paperid     doi title …
+            1968760011, …,  …,    …
+            2140101301, …,  …,    …
+            2374592160, …,  …,    …
+          </pre>
+          <pre>
+            Authors.txt: 256.683.554 lines
+            authorid name
+            1139,    Jennifer Putzi
+            1611,    純子 貝原
+            1799,    Hossein Gholaman
+          </pre>
+          <aside class="notes">
+            ... Papers have an id and authors, too.
+            They are stored in different files.
+            Notice that these files do not contain the relation between the two.
+            And both are more than 200 million entries.
+            Now, to get the names into the papers, we need to look at another file.
+          </aside>
+        </section>
+        <section>
+          <pre>
+            PaperAuthorAffiliations.txt: 566.136.708 lines
+            paperid authorid    position
+            37,     2151921381, 2
+            37,     2722638736, 3
+            37,     2767506227, 1
+          </pre>
+          <aside class="notes">
+            This file is over 560 million lines long and contains this information.
+            But how do we go about that?
+            We need random access to look up the author information, but we can't fit it into 32 GiB of RAM.
+            Well, my solution was to index everything in solr, and then read it all back.
+            It's not very straightforward and it took 32 hours, but it worked.
+          </aside>
+        </section>
+        <section>
+          <p>it's complicated</p>
+          <pre><code class="hljs" data-line-numbers="2,6" data-trim data-noescape>
+            const query = {
+              "fl": "*,sq:[subquery]"​​,
+              "q": "id:1570265525",
+              "sort": "year desc",
+              "sq.fq": "-(author:'Manfred Reichert')",
+              ​​"sq.q": "{!terms f=id v=$row.references}",
+              ​​"sq.rows": 10,
+              ​​"sq.sort": "year desc",
+              ​​"sq.start": 0
+            };
+          </code></pre>
+          <aside class="notes">
+            Then there are some of the queries that are not easily put together.
+            This might not look very intimidating, but this part took me several hours.
+            Let's not get into details, because we have ...
+          </aside>
+        </section>
+        <section data-transition="none">
+          it's <b>really</b> complicated
+          <pre><code data-trim class="hljs" data-line-numbers="1-14" data-noescape>
+                  expr = f'''
+                    select(
+                      rollup(
+                        sort(
+                          select(
+                            search({collection}, q=author:"{author}",
+                              fl="author, author_count, id",
+                              sort="id desc", qt=/export, rows={rows}),
+                            add(1,indexOf(author, "{author}")) as position,
+                            if(eq(author_count,position), 1,0) as is_last),
+                          by="position asc"),
+                        over="position", count(*), sum(is_last)),
+                      count(*) as count, position, sum(is_last) as senior_count
+                  )'''
+                </code></pre>
+          <aside class="notes">
+            ... this!
+            This had me running in circles for a few days.
+            Instead of delivering the data in the original order, it was sorted.
+            I wrote the mailing lists, if somebody could help here.
+            But nobody could help, I wasn't sure if I found a bug.
+          </aside>
+        </section>
+        <section data-transition="none">
+          it's <b>really</b> complicated
+          <pre><code data-trim class="hljs" data-line-numbers="8" data-noescape>
+                    expr = f'''
+                      select(
+                        rollup(
+                          sort(
+                            select(
+                              search({collection}, q=author:"{author}",
+                                fl="author, author_count, id",
+                                sort="id desc", qt=/<mark>export</mark>, rows={rows}),
+                              add(1,indexOf(author, "{author}")) as position,
+                              if(eq(author_count,position), 1,0) as is_last),
+                            by="position asc"),
+                          over="position", count(*), sum(is_last)),
+                        count(*) as count, position, sum(is_last) as senior_count
+                    )'''
+                  </code></pre>
+          <aside class="notes">
+            A few weeks later I hopped into IRC and asked again.
+            After two days, somebody finally figured it out.
+          </aside>
+        </section>
+
+        <section data-transition="none">
+          it's <b>really</b> complicated
+          <pre><code data-trim class="hljs" data-line-numbers="8">
+                expr = f'''
+                  select(
+                    rollup(
+                      sort(
+                        select(
+                          search({collection}, q=author:"{author}",
+                            fl="author, author_count, id",
+                            sort="id desc", qt=/select, rows={rows}),
+                          add(1,indexOf(author, "{author}")) as position,
+                          if(eq(author_count,position), 1,0) as is_last),
+                        by="position asc"),
+                      over="position", count(*), sum(is_last)),
+                    count(*) as count, position, sum(is_last) as senior_count
+                )'''
+              </code></pre>
+          <aside class="notes">
+            all it took was changing from export to select (and some other changes).
+            Let's not go into detail now, because explaining all this will take some minutes.
+          </aside>
+        </section>
+      </section>
+      <section comment="eval">
+        <section data-transition="slide-in fade-out">
+          <p style="font-size: 2em">Evaluation</p>
+          <aside class="notes">
+            seven researchers from computer science solved small tasks,
+            like finding intersections of author to journals.
+            I watched them and helped, when necessary.
+            It turned out, that some of the UI choices I made were counter-intuitive,
+            so the feedback was incredibly valuable and I changed it for the better.
+          </aside>
+        </section>
+        <section data-transition="none">
+          <p style="font-size: 2em">Evaluation</p>
+          <aside class="notes">
+            apart from that, there were questions wether we could interface with other software.
+            Like the reference management people already have, and the answer is:
+            "sure, we could". Escpecially since this is all open source :D
+          </aside>
+        </section>
+      </section>
+      <section>
+        <!-- <p class="fragment fade-out">fade-out</p> -->
+        <p style="font-size: 2em" class="fragment fade-down">free and open source</p>
+        <p style="font-size: 2em" class="fragment fade-left">tracking + filtering</p>
+        <p style="font-size: 2em" class="fragment fade-right">extendable</p>
+        <p style="font-size: 2em" class="fragment fade-up">many new possibilities</p>
+        <aside class="notes">
+          FOSS access to large open databases.
+          tracking of taken paths and many options for filtering.
+          extendable by others, or a complete replacement just for a new prototype.
+          opens up many new possibilities for both research and the research community.
+        </aside>
+      </section>
+      <section>
+        <p style="font-size: 4em">?</p>
+        <p><svg height="1em" style="vertical-align: middle" version="1.1" viewBox="0 0 16 16"
+            xmlns="http://www.w3.org/2000/svg" xmlns:osb="http://www.openswatchbook.org/uri/2009/osb">
+            <g stroke="#ffc30a">
+              <path d="m2.5 0.5h1v1" fill="none" stroke-linecap="square" stroke-width="1px" />
+              <path d="m5.5 2.5h1v1h3v1h1v1h1v5h-1v2h-3v-1h-2v-1h-1v-1h-1v-6h2z" fill="#ffc30a" stroke-width="1px" />
+              <g fill="none" stroke-linecap="square" stroke-width="1px">
+                <path d="m11.5 2.5h2v-1h1v-1h1" />
+                <path d="m13.5 7.5h1v1h1" />
+                <path d="m13.5 12.5v1" />
+                <path d="m0.5 5.5h1v1" />
+                <path d="m2.5 15.5h1v-1h1v-1" />
+                <path d="m9.5 14.5v1h1" />
+              </g>
+              <rect x="14" y="14" width="1" height="1" fill="#ffc30a" stroke-linejoin="round" stroke-width=".01" />
+              <rect x="15" y="15" width="1" height="1" fill="#ffc30a" stroke-linejoin="round" stroke-width=".01" />
+            </g>
+          </svg>
+          <a href="https://sonne.0ds.de">sonne.0ds.de</a>
+        </p>
+        <p>
+          <svg height="1em" style="fill: #fff; vertical-align: middle" viewBox="0 0 16 16" version="1.1">
+            <path fill-rule="evenodd"
+              d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z">
+            </path>
+          </svg>
+          <a href="https://github.com/sonne-academic">github/sonne-academic</a>
+        </p>
+        <p>
+          <img src="img/me.png" style="background-color: inherit; height: 1em; vertical-align: middle; border-style: none;"/>
+          <a href="https://blog.0ds.de">blog.0ds.de</a>||<a href="https://orcid.org/0000-0001-8453-5026">orcid.org/0000-0001-8453-5026</a>
+        </p>
+        <aside class="notes">
+
+        </aside>
+      </section>
+
+    </div>
+  </div>
+
+  <script src="js/reveal.js"></script>
+
+  <script>
+    // More info about config & dependencies:
+    // - https://github.com/hakimel/reveal.js#configuration
+    // - https://github.com/hakimel/reveal.js#dependencies
+    Reveal.initialize({
+      progress: true,
+      controlsTutorial: false,
+      controls: false,
+      hash: true,
+      navigationMode: 'linear',
+      slideNumber: true,
+      dependencies: [
+        { src: 'plugin/markdown/marked.js' },
+        { src: 'plugin/markdown/markdown.js' },
+        { src: 'plugin/notes/notes.js', async: true },
+        { src: 'plugin/highlight/highlight.js', async: true }
+      ]
+    });
+  </script>
+</body>
+
 </html>
