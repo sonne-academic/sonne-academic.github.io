@@ -30,12 +30,15 @@
       <section data-background-image="img/sonne.svg" data-background-size="25%" data-background-position="100% 0%">
         <p style="font-size: 2em;">Combining Interactive Exploration and Search</p>
         <p>for Navigating Academic Citation Data</p>
-        <!-- <img style="border-style: none; background-color: #191919" width="200" data-src="img/sonne.svg" alt="Down arrow"> -->
+        <aside class="notes">
+          Hello!
+          Just so you know what you're in for:
+          We'll first look at other academic search engines and why I don't like them.
+          Then I'll show you what I built, how it works and what challenges I faced.
+          Just after, I tell you a bit about the evaluation and then there's time for questions.
+        </aside>
       </section>
       <section comment="What to solve">
-        <!-- <section>
-          <p style="font-size: 2em;">Problem!</p>
-        </section> -->
         <section>
           Exhibit A - Google Scholar
           <video data-autoplay src="vid/scholarzoom.mp4"></video>
@@ -105,18 +108,18 @@
           <aside class="notes">
             oh. one.
             ok, has quirks.
+            So, let's look at how I did :D
           </aside>
         </section>
       </section>
       <section comment="what I did" data-background-transition="zoom" data-background-image="img/sonne.svg"
         data-background-size="contain">
         <section data-transition="fade">
-          <p style="font-size: 3em;">Sonne</p>
           <aside class="notes">
             So I built my own search engine with data from Semantic Scholar, Microsoft Academic Graph and dblp.
-            I called it "Sonne", because it's database is Apache Solr.
+            I called it "sonne", because it's database is Apache Solr.
             It's primary purpose is exploration of unfamiliar fields of study.
-            Let's say, I'm interested in graph layout...
+            So let's say, I'm interested in graph layout...
           </aside>
         </section>
         <section data-transition="slide-in fade-out">
@@ -176,13 +179,12 @@
           <aside class="notes">
             So apart from my mindless wandering, we can reconstruct how we got here.
             This is especially important when you're breaking into new fields.
-            Let me demonstrate:
+            Let me demonstrate by another example: let's get back to the survey.
           </aside>
         </section>
         <section data-transition="none" data-transition-speed="fast">
           <video data-autoplay src="vid/sonne/07faster.mp4"></video>
           <aside class="notes">
-            Let's get back to the survey.
             A breadth first search is often necessary to learn new technical terms.
             To get an overview, I want to track the relations between papers.
             Sure you could do that with mind maps, but I find the extra labor annoying.
@@ -202,6 +204,7 @@
           <video data-autoplay src="vid/sonne/09.mp4"></video>
           <aside class="notes">
             ... how often Manfred Reichert cites himself.
+            (Don't hate the player, ...)
           </aside>
         </section>
         <section data-transition="none" data-transition-speed="fast">
@@ -248,8 +251,8 @@
 
           <aside class="notes">
             ... this little gem from the field type definitions.
-            This is mentioned in one page, and used in *none* of the examples.
-            And if you get one thing wrong, you'll have to build the index again.
+            This is mentioned in exactly one place, and used in *none* of the examples.
+            And if you get one thing wrong, you'll have to rebuild the whole database.
             Which brings us to the next topic ...
           </aside>
         </section>
@@ -321,7 +324,7 @@
           <aside class="notes">
             This file is over 560 million lines long and contains this information.
             But how do we go about that?
-            We need random access to look up the author information, but we can't fit it into 32 GiB of RAM.
+            We need random access to look up the author information, but we can't fit it into RAM trivially.
             Well, my solution was to index everything in solr, and then read it all back.
             It's not very straightforward and it took 32 hours, but it worked.
           </aside>
