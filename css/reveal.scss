@@ -582,19 +582,21 @@ $controlsArrowAngleActive: 36deg;
 .reveal .slide-number {
 	position: absolute;
 	display: block;
-	right: 8px;
+	left: 8px;
 	bottom: 8px;
 	z-index: 31;
 	font-family: Helvetica, sans-serif;
-	font-size: 12px;
+	font-size: 1em;
 	line-height: 1;
 	color: #fff;
 	background-color: rgba( 0, 0, 0, 0.4 );
 	padding: 5px;
+	opacity: .5;
 }
 
 .reveal .slide-number a {
 	color: currentColor;
+	opacity: .5;
 }
 
 .reveal .slide-number-delimiter {
