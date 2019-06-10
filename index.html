@@ -35,6 +35,7 @@
             This is google scholar, when searching for an author.
             We find over 1000 publications for tim dwyer.
             But as soon as we want to sort by recent publications, we're down to 19.
+            Google also does not provide information about references.
             Microsoft does a much better job here:
           </aside>
         </section>
@@ -97,6 +98,36 @@
           <aside class="notes">
             oh. one.
             ok, has quirks.
+          </aside>
+        </section>
+        <section>
+          <p style="font-size: 3em;">trivia time!</p>
+        </section>
+        <section>
+          <p style="font-size: 2em;">∃ paper with more than</p>
+          <p>A: 10,000</p>
+          <p>B: 20,000</p>
+          <p>C: 30,000</p>
+          <p style="font-size: 2em;">sources</p>
+          <aside class="notes">
+            which of the following is true?
+          </aside>
+        </section>
+        <section>
+          <p>B<span style="font-size: .5em">(and A)</span></p>
+          <img src="img/trivia/references_count.png">
+        </section>
+        <section>
+          <img src="img/trivia/references_count_mag.png">
+          <aside class="notes">
+            the largest with a doi that I could verify has 5k sources in MAG.
+          </aside>
+        </section>
+        <section>
+          <img src="img/trivia/references_count_crossref.png">
+          <aside class="notes">
+            crossref has accurate data and gives 3344 sources, because T&F actually do their job as a publisher.
+            I don't actually know, tho.
             So, let's look at how I did :D
           </aside>
         </section>
@@ -168,7 +199,34 @@
           <aside class="notes">
             So apart from my mindless wandering, we can reconstruct how we got here.
             This is especially important when you're breaking into new fields.
-            Let me demonstrate by another example: let's get back to the survey.
+            Let me demonstrate by another example, but first:
+          </aside>
+        </section>
+        <section>
+          <div style="background-color: black">
+            <p style="font-size: 3em;">trivia time!</p>
+          </div>
+        </section>
+        <section>
+          <div style="background-color: black">
+            <p style="font-size: 2em;">∃ paper that was cited $1 times and it's title starts with $2</p>
+            <p>A: 240,551; "Protein ..."</p>
+            <p>B: 196,067; "Cleavage ..."</p>
+            <p>C: 182,776; "A rapid ..."</p>
+          </div>
+        </section>
+        <section>
+          <div style="background-color: black">
+            <p>trick question</p>
+          </div>
+          <img src="img/trivia/cited_by_count.png">
+        </section>
+        <section>
+          <img src="img/trivia/cited_by_count_crossref.png">
+          <aside class="notes">
+            crossref has accurate data and gives 3344 sources, because T&F actually do their job as a publisher.
+            I don't actually know, tho.
+            So, let's look at how I did :D
           </aside>
         </section>
         <section data-transition="none" data-transition-speed="fast">
@@ -194,10 +252,16 @@
           <aside class="notes">
             ... how often Manfred Reichert cites himself.
             (Don't hate the player, ...)
+            Back to a more serious note.
           </aside>
         </section>
         <section data-transition="none" data-transition-speed="fast">
-          <video data-autoplay src="vid/sonne/10.mp4"></video>
+          <aside class="notes">
+            the cool thing about semantic scholar is, that they provide keywords.
+          </aside>
+        </section>
+        <section data-transition="none" data-transition-speed="fast">
+          <video data-autoplay src="vid/sonne/exp01.mp4"></video>
           <aside class="notes">
             Much more useful for visualization might be the range faceting.
             You can ask for bucketed data about between 0 and 50,000 how often papers are cited.
@@ -205,7 +269,7 @@
           </aside>
         </section>
         <section data-transition="none" data-transition-speed="fast">
-          <video data-autoplay src="vid/sonne/11.mp4"></video>
+          <video data-autoplay src="vid/sonne/exp02.mp4"></video>
           <aside class="notes">
             ... we can also change this to make a more fine grained request.
             Remember, this works this fast on over 210 million publications.
@@ -411,6 +475,25 @@
             Let's not go into detail now, because explaining all this will take some minutes.
           </aside>
         </section>
+        <section>
+            <p style="font-size: 3em;">trivia time!</p>
+          </section>
+          <section>
+            <p style="font-size: 2em;">journal article max(|authors|)</p>
+            <p>A: medicine</p>
+            <p>B: physics</p>
+          </section>
+          <section>
+              <p>"Monday, 27 August 2012"</p>
+            <img src="img/trivia/authors.png">
+          </section>
+          <section>
+            <img src="img/trivia/authors_mag.png">
+            <aside class="notes">
+              so even this time MAG got this all wrong.
+              In theory there are 9147 authors, but all "on behalf of $institution"
+            </aside>
+          </section>
       </section>
       <section comment="eval">
         <section data-transition="slide-in fade-out">
@@ -475,8 +558,10 @@
           <a href="https://github.com/sonne-academic">github/sonne-academic</a>
         </p>
         <p>
-          <img src="img/me.png" style="background-color: inherit; height: 1em; vertical-align: middle; border-style: none;"/>
-          <a href="https://blog.0ds.de">blog.0ds.de</a>||<a href="https://orcid.org/0000-0001-8453-5026">orcid.org/0000-0001-8453-5026</a>
+          <img src="img/me.png"
+            style="background-color: inherit; height: 1em; vertical-align: middle; border-style: none;" />
+          <a href="https://blog.0ds.de">blog.0ds.de</a>||<a
+            href="https://orcid.org/0000-0001-8453-5026">orcid.org/0000-0001-8453-5026</a>
         </p>
         <aside class="notes">
 
