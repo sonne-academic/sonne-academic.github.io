@@ -17,14 +17,10 @@
   <div class="reveal">
     <div class="slides">
       <section data-background-image="img/sonne.svg" data-background-size="25%" data-background-position="100% 0%">
-        <p style="font-size: 2em;">Combining Interactive Exploration and Search</p>
-        <p>for Navigating Academic Citation Data</p>
+        <p style="font-size: 2em;">What the Code?</p>
+        <p>sonne.0ds.de Implementierungsdetails</p>
         <aside class="notes">
-          Hello!
-          Just so you know what you're in for:
-          We'll first look at other academic search engines and why I don't like them.
-          Then I'll show you what I built, how it works and what challenges I faced.
-          Just after, I tell you a bit about the evaluation and then there's time for questions.
+          Was ist sonne, warum wollte ich das und wie funktionierts
         </aside>
       </section>
       <section comment="What to solve">
@@ -39,7 +35,7 @@
             Microsoft does a much better job here:
           </aside>
         </section>
-        <section data-transition="slide-in fade-out">
+        <!-- <section data-transition="slide-in fade-out">
           Exhibit B - Microsoft Academic
           <video data-autoplay src="vid/mag/01.mp4"></video>
           <aside class="notes">
@@ -54,17 +50,15 @@
             on the right we can see that there are disambiguations for the author.
             the middle has the publications.
           </aside>
-        </section>
+        </section> -->
         <section data-transition="none">
           Exhibit B - Microsoft Academic
           <video data-autoplay src="vid/mag/03.mp4"></video>
           <aside class="notes">
-            nice, the affiliation and the authors are linked, so we get a fast overview.
-            Oh look, much more sorting options than google.
-            let's grab the most cited paper ...
+            microsoft academic ist komfortabler kann aber auch nicht alphabetisch sortieren.
           </aside>
         </section>
-        <section data-transition="none">
+        <!-- <section data-transition="none">
           Exhibit B - Microsoft Academic
           <video data-autoplay src="vid/mag/04.mp4"></video>
           <aside class="notes">
@@ -131,7 +125,7 @@
             So, let's look at how I did :D
           </aside>
         </section>
-      </section>
+      </section> -->
       <section comment="what I did" data-background-transition="zoom" data-background-image="img/sonne.svg"
         data-background-size="contain">
         <section data-transition="fade">
@@ -202,7 +196,7 @@
             Let me demonstrate by another example, but first:
           </aside>
         </section>
-        <section>
+        <!-- <section>
           <div style="background-color: black">
             <p style="font-size: 3em;">trivia time!</p>
           </div>
@@ -229,7 +223,7 @@
             I don't actually know, tho.
             So, let's look at how I did :D
           </aside>
-        </section>
+        </section> -->
         <section data-transition="none" data-transition-speed="fast">
           <video data-autoplay src="vid/sonne/07faster.mp4"></video>
           <aside class="notes">
@@ -256,7 +250,7 @@
             Back to a more serious note.
           </aside>
         </section>
-        <section data-transition="none" data-transition-speed="fast">
+        <!-- <section data-transition="none" data-transition-speed="fast">
           <aside class="notes">
             the cool thing about semantic scholar is, that they provide keywords.
           </aside>
@@ -276,7 +270,7 @@
             Remember, this works this fast on over 210 million publications.
             So there's huge potential for experimentation.
           </aside>
-        </section>
+        </section> -->
       </section>
       <section comment="challenges">
         <section>
@@ -322,6 +316,7 @@
           </aside>
         </section>
         <section>
+          <p>muss man sich erst zusammenbauen</p>
           <pre><code class="hljs" data-line-numbers="3,6,9" data-trim>
             const doc = {
               id: "2142920027",
@@ -384,7 +379,7 @@
           </aside>
         </section>
         <section>
-          <p>it's complicated</p>
+          <p>query DSL nicht ganz einfach</p>
           <pre><code class="hljs" data-line-numbers="2,6" data-trim data-noescape>
             const query = {
               "fl": "*,sq:[subquery]"​​,
@@ -404,7 +399,7 @@
           </aside>
         </section>
         <section data-transition="none">
-          it's <b>really</b> complicated
+          also wirklich <b>echt</b> nicht
           <pre><code data-trim class="hljs" data-line-numbers="1-14" data-noescape>
                   expr = f'''
                     select(
@@ -430,7 +425,7 @@
           </aside>
         </section>
         <section data-transition="none">
-          it's <b>really</b> complicated
+          also wirklich <b>echt</b> nicht
           <pre><code data-trim class="hljs" data-line-numbers="8" data-noescape>
                     expr = f'''
                       select(
@@ -454,7 +449,7 @@
         </section>
 
         <section data-transition="none">
-          it's <b>really</b> complicated
+          also wirklich <b>echt</b> nicht
           <pre><code data-trim class="hljs" data-line-numbers="8">
                 expr = f'''
                   select(
@@ -476,7 +471,7 @@
             Let's not go into detail now, because explaining all this will take some minutes.
           </aside>
         </section>
-        <section>
+        <!-- <section>
             <p style="font-size: 3em;">trivia time!</p>
           </section>
           <section>
@@ -494,9 +489,9 @@
               so even this time MAG got this all wrong.
               In theory there are 9147 authors, but all "on behalf of $institution"
             </aside>
-          </section>
+          </section> -->
       </section>
-      <section comment="eval">
+      <!-- <section comment="eval">
         <section data-transition="slide-in fade-out">
           <p style="font-size: 2em">Evaluation</p>
           <aside class="notes">
@@ -515,19 +510,24 @@
             "sure, we could". Escpecially since this is all open source :D
           </aside>
         </section>
-      </section>
+      </section> -->
       <section>
         <!-- <p class="fragment fade-out">fade-out</p> -->
-        <p style="font-size: 2em" class="fragment fade-down">free and open source</p>
-        <p style="font-size: 2em" class="fragment fade-left">tracking + filtering</p>
-        <p style="font-size: 2em" class="fragment fade-right">extendable</p>
-        <p style="font-size: 2em" class="fragment fade-up">many new possibilities</p>
+        <p style="font-size: 2em" class="fragment fade-down">FOSS / Apache2</p>
+        <p style="font-size: 2em" class="fragment fade-left">skaliert</p>
+        <p style="font-size: 2em" class="fragment fade-right">modular & erweiterbar </p>
+        <p style="font-size: 2em" class="fragment fade-up">nicht ganz klein :D</p>
         <aside class="notes">
           FOSS access to large open databases.
           tracking of taken paths and many options for filtering.
           extendable by others, or a complete replacement just for a new prototype.
           opens up many new possibilities for both research and the research community.
         </aside>
+      </section>
+      <section>
+        <section  data-background-image="img/frontend-impl.svg" data-background-size="contain">
+        
+        </section>
       </section>
       <section>
         <p style="font-size: 4em">?</p>
